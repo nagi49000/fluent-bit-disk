@@ -10,8 +10,7 @@ RUN git clone --depth 1 --branch v${VERSION} https://github.com/fluent/fluent-bi
     # rather dirty, will build in root dir rather than build dir so that built header files
     # will be available to the plugin on fluent-bit include paths
     cd fluent-bit && \
-    cmake . && \
-    make
+    cmake .
 
 COPY in_vdisk fluent-bit-disk/in_vdisk
 COPY CMakeLists.txt fluent-bit-disk/CMakeLists.txt  
