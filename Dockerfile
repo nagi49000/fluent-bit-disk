@@ -13,9 +13,11 @@ RUN git clone --depth 1 --branch v${VERSION} https://github.com/fluent/fluent-bi
     cmake . && \
     make
 
+COPY in_vdisk fluent-bit-disk/in_vdisk
+COPY CMakeLists.txt fluent-bit-disk/CMakeLists.txt  
+
 # build on fluent-bit-disk
-RUN git clone --depth 1 https://github.com/nagi49000/fluent-bit-disk.git && \
-    cd fluent-bit-disk && \
+RUN cd fluent-bit-disk && \
     mkdir -p build && \
     cd build && \
     cmake -DFLB_SOURCE=/build/fluent-bit/ -DPLUGIN_NAME=in_vdisk .. && \
