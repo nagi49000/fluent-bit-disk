@@ -18,3 +18,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: docker build
       run: docker build --build-arg VERSION=3.1.4 --tag fluent-bit:3.1.4-with-disk .
+    - name: docker run
+      run: |
+        docker run -d --name fluent-test -v"$(pwd)"/example-fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro -v"$(pwd)"/logs:/fluent-bit/log fluent-bit:3.1.4-with-disk
+        sleep 10
+        docker stop fluent-test
+        ls logs
