@@ -22,5 +22,9 @@ jobs:
       run: |
         docker run -d --name fluent-test -v"$(pwd)"/example-fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro -v"$(pwd)"/logs:/fluent-bit/log fluent-bit:3.1.4-with-disk
         sleep 10
+        docker logs fluent-test
         docker stop fluent-test
+        echo "######################"
+        ls
         ls logs
+        echo "########################"
