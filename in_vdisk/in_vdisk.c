@@ -156,7 +156,7 @@ int in_vdisk_collect(struct flb_input_instance *i_ins,
   msgpack_pack_str_body(&mp_pck, "inodes_pct", 10);
   msgpack_pack_double(&mp_pck, 100 - ((freei / availi) * 100));
 
-  flb_input_chunk_append_raw(i_ins, NULL, 0, mp_sbuf.data, mp_sbuf.size);
+  flb_input_chunk_append_raw(i_ins, FLB_INPUT_LOGS, 0, NULL, 0, mp_sbuf.data, mp_sbuf.size);
   msgpack_sbuffer_destroy(&mp_sbuf);
 
   return 0;
