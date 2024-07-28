@@ -102,7 +102,7 @@ static int in_vdisk_init(struct flb_input_instance *in,
   ret = flb_input_set_collector_time(in, in_vdisk_collect, ctx->interval_sec,
                                      ctx->interval_nsec, config);
   if (ret == -1) {
-    flb_error("[in_cpu] Could not set collector for CPU input plugin");
+    flb_error("[in_vdisk] Could not set collector for vdisk input plugin");
     return -1;
   }
   ctx->coll_fd = ret;
@@ -163,7 +163,7 @@ int in_vdisk_collect(struct flb_input_instance *i_ins,
   msgpack_pack_str_body(&mp_pck, "inodes_pct", 10);
   msgpack_pack_double(&mp_pck, 100 - ((freei / availi) * 100));
 
-  flb_input_chunk_append_raw(i_ins, FLB_INPUT_LOGS, 0, NULL, 0, mp_sbuf.data, mp_sbuf.size);
+  flb_input_chunk_append_raw(i_ins, FLB_INPUT_LOGS, 0, i_ins->tag, i_ins->tag_len, mp_sbuf.data, mp_sbuf.size);
   msgpack_sbuffer_destroy(&mp_sbuf);
 
   return 0;
