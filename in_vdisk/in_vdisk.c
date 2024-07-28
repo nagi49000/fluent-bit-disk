@@ -85,6 +85,13 @@ static int in_vdisk_init(struct flb_input_instance *in,
     ctx->interval_nsec = DEFAULT_INTERVAL_NSEC;
   }
 
+  pval = flb_input_get_property("interval_sec", in);
+  if (pval != NULL && atoi(pval) >= 0) {
+    ctx->interval_sec = atoi(pval);
+  } else {
+    ctx->interval_sec = DEFAULT_INTERVAL_SEC;
+  }
+
   if (ctx->interval_sec <= 0 && ctx->interval_nsec <= 0) {
     ctx->interval_sec = DEFAULT_INTERVAL_SEC;
     ctx->interval_nsec = DEFAULT_INTERVAL_NSEC;
