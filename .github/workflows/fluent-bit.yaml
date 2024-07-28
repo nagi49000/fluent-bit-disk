@@ -24,6 +24,6 @@ jobs:
         sleep 10
         docker stop fluent-test
         docker logs fluent-test
-        echo "######################"
+        if [ -f logs/vdisk.0 ]; then echo "vdisk file output found :-)"; else echo "*** Test fail - vdisk output not found :("; exit 1; fi
         cat logs/vdisk.0
-        echo "########################"
+        if grep 'bytes_total' logs/vdisk.0 > /dev/null; then echo "bytes_total found int output log :-)"; else echo "*** Test fail - vdisk output not found :("; exit 1 ; fi
