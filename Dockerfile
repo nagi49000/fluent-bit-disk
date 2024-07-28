@@ -25,9 +25,9 @@ RUN cd fluent-bit-disk && \
     # we should now have some shared objects to copy into the release image
     find ./ -name *.so
 
-FROM fluent/fluent-bit:${VERSION}-debug
+FROM fluent/fluent-bit:${VERSION}
+# FROM fluent/fluent-bit:${VERSION}-debug
 # register the new shared object in the plugins configuration
-RUN mkdir /fluent-bit/plugins && \
-    echo "    Path /fluent-bit/plugins/flb-in_vdisk.so" >> /fluent-bit/etc/plugins.conf
+COPY example-plugins.conf fluent-bit/etc/plugins.conf
 # and copy the shared object into the release image
 COPY --from=builder /build/fluent-bit-disk/build/flb-in_vdisk.so /fluent-bit/plugins/flb-in_vdisk.so
