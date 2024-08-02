@@ -13,7 +13,7 @@ RUN git clone --depth 1 --branch v${VERSION} https://github.com/fluent/fluent-bi
     cmake .
 
 COPY in_vdisk fluent-bit-disk/in_vdisk
-COPY CMakeLists.txt fluent-bit-disk/CMakeLists.txt  
+COPY CMakeLists.txt fluent-bit-disk/CMakeLists.txt
 
 # build on fluent-bit-disk
 RUN cd fluent-bit-disk && \
